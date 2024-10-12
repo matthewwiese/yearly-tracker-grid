@@ -1,0 +1,42 @@
+\documentclass[a5paper]{article}
+\usepackage[margin=5mm]{geometry}
+\usepackage{tikz}
+\usepackage{adjustbox}
+
+\newcommand{\customgrid}{%
+\begin{tikzpicture}[scale=0.55, font=\footnotesize\ttfamily]
+    % Draw the 12x31 grid
+    \draw (0,0) grid (12,31);
+    
+    % Add numbers 1 to 31 on the left side
+    \foreach \y in {1,2,...,31}{
+        \node[anchor=east] at (-0.3,31.5-\y) {\y};
+    }
+    
+    % Add first letters of months at the top
+    \foreach \x/\month in {1/J,2/F,3/M,4/A,5/M,6/J,7/J,8/A,9/S,10/O,11/N,12/D}{
+        \node[anchor=south] at (\x-0.5,31.2) {\month};
+    }
+    
+    % Draw 10 squares with labels on the right side
+    \foreach \y in {0,1,...,9}{
+        % Draw the square
+        \draw[line width=0.2pt] (13,30-\y*3) rectangle (14,29-\y*3);
+        
+        % Add the label
+        \node[anchor=west] at (14.2,29.5-\y*3) {Item \the\numexpr\y+1\relax};
+    }
+\end{tikzpicture}
+}
+
+\begin{document}
+\begin{adjustbox}{center}
+\begin{minipage}[c][\textheight][c]{\textwidth}
+\centering
+% Shift content slightly to the right by adding horizontal space
+\vspace*{0pt} % Optional vertical space adjustment
+\hspace*{5mm} % Shift right by 5mm
+\customgrid
+\end{minipage}
+\end{adjustbox}
+\end{document}
